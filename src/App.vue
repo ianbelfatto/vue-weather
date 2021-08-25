@@ -142,6 +142,7 @@ export default {
 
 body {
   font-family: "Inter", sans-serif;
+  line-height: 28px;
 }
 
 #app {
