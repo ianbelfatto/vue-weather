@@ -70,16 +70,13 @@ export default {
       this.weather = results;
       /* Temp Logic */
       if (this.weather.main.temp < 65) {
-        console.log("cold");
         this.message = "It's cold, bring a jacket.";
       }
       if (this.weather.main.temp > 65 && this.weather.main.temp < 75) {
-        console.log("warm");
         this.message = "It's chilly, just a light jacket today.";
       }
       if (this.weather.main.temp > 75) {
-        console.log("hot");
-        this.message = "It's hot out, shorts and t-shirt or you'll be all sweaty.";
+        this.message = "It's hot out, wear shorts and a t-shirt or you'll be all sweaty.";
       }
       /* Conditions Logic */
       if (this.weather.weather[0].main == "Clouds") {
@@ -141,7 +138,7 @@ export default {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 28px;
 }
 
