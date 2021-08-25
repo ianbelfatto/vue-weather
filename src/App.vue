@@ -83,7 +83,7 @@ export default {
       }
       /* Conditions Logic */
       if (this.weather.weather[0].main == "Clouds") {
-        this.conditions = "It's cloudy af.";
+        this.conditions = "There could be a few clouds out there.";
       }
       if (this.weather.weather[0].main == "Clear") {
         this.conditions = "Clear skies, good vibes.";
