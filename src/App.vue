@@ -11,6 +11,7 @@
         </div>
         <div class="weather-box">
           <div class="temperature">{{ Math.round(weather.main.temp) }}°F</div>
+          <div>{{ message }}</div>
           <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
@@ -27,6 +28,7 @@ export default {
       url_base: "https://api.openweathermap.org/data/2.5/",
       query: "",
       weather: {},
+      message: "",
     };
   },
   methods: {
@@ -41,6 +43,18 @@ export default {
     },
     setResults(results) {
       this.weather = results;
+      if (this.weather.main.temp < 65) {
+        console.log("cold");
+        this.message = "It's cold, bring a jacket.";
+      }
+      if (this.weather.main.temp > 65 && this.weather.main.temp < 75) {
+        console.log("warm");
+        this.message = "It's chilly, just a light jacket today.";
+      }
+      if (this.weather.main.temp > 75) {
+        console.log("hot");
+        this.message = "It's hot out, shorts and t-shirt.";
+      }
     },
     dateBuilder() {
       let d = new Date();
@@ -79,7 +93,7 @@ export default {
 }
 
 body {
-  font-family: "montserrat", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 #app {
@@ -96,8 +110,6 @@ body {
 main {
   min-height: 100vh;
   padding: 25px;
-
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.75));
 }
 
 .search-box {
@@ -133,9 +145,9 @@ main {
 .location-box .location {
   color: white;
   font-size: 32px;
-  font-weight: 500;
+  font-weight: 900;
   text-align: center;
-  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
+  /* text-shadow: 1px 3px rgba(0, 0, 0, 0.25); */
 }
 
 .location-box .date {
