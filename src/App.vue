@@ -32,7 +32,7 @@ export default {
   methods: {
     fetchWeather(e) {
       if (e.key == "Enter") {
-        fetch(`${this.url_base}weather?q=${this.query}&units=imperial&APPID=${this.api_key}`)
+        fetch(`${this.url_base}weather?q=${this.query},US&units=imperial&APPID=${this.api_key}`)
           .then(response => {
             return response.json();
           })
