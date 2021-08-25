@@ -68,6 +68,24 @@ export default {
       if (this.weather.weather[0].main == "Clouds") {
         this.conditions = "It's cloudy af.";
       }
+      if (this.weather.weather[0].main == "Clear") {
+        this.conditions = "Clear skies, good vibes.";
+      }
+      if (this.weather.weather[0].main == "Atmosphere") {
+        this.conditions = "Hella dangerous out there, don't leave the house.";
+      }
+      if (this.weather.weather[0].main == "Snow") {
+        this.conditions = "It's snowing. Go grab your shovel and dig your car out.";
+      }
+      if (this.weather.weather[0].main == "Rain") {
+        this.conditions = "It's raining, it's pouring, the old man is snoring.";
+      }
+      if (this.weather.weather[0].main == "Drizzle") {
+        this.conditions = "Fo' shizzle my drizzle.";
+      }
+      if (this.weather.weather[0].main == "Thunderstorm") {
+        this.conditions = "*Thunderstruck by Metallica starts playing*";
+      }
     },
     dateBuilder() {
       let d = new Date();
