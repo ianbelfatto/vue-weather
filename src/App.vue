@@ -4,14 +4,14 @@
       <div class="search-box">
         <input type="text" class="search-bar" placeholder="Search..." v-model="query" @keypress="fetchWeather" />
       </div>
-      <div class="weather-wrap">
+      <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
-          <div class="location">Kingston, NY</div>
+          <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
           <div class="date">Wednesday August 25 2021</div>
         </div>
         <div class="weather-box">
-          <div class="temperature">65°</div>
-          <div class="weather">Sun</div>
+          <div class="temperature">{{ Math.round(weather.main.temp) }}°F</div>
+          <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
     </main>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       api_key: "d937f5bdc988400e8f8ba64ae5cf7f2c",
-      url_base: "https://api.openweathermap.org/data/2.5",
+      url_base: "https://api.openweathermap.org/data/2.5/",
       query: "",
       weather: {},
     };
@@ -32,7 +32,7 @@ export default {
   methods: {
     fetchWeather(e) {
       if (e.key == "Enter") {
-        fetch(`${this.api_base}weather?q=${this.query}&APPID=${this.api_key}`)
+        fetch(`${this.url_base}weather?q=${this.query}&units=imperial&APPID=${this.api_key}`)
           .then(response => {
             return response.json();
           })
