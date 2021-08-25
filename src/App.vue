@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 70 ? 'warm' : ''">
     <main>
       <div class="search-box">
         <input type="text" class="search-bar" placeholder="Search..." v-model="query" @keypress="fetchWeather" />
@@ -7,7 +7,7 @@
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
-          <div class="date">Wednesday August 25 2021</div>
+          <div class="date">{{ dateBuilder() }}</div>
         </div>
         <div class="weather-box">
           <div class="temperature">{{ Math.round(weather.main.temp) }}°F</div>
@@ -42,6 +42,31 @@ export default {
     setResults(results) {
       this.weather = results;
     },
+    dateBuilder() {
+      let d = new Date();
+      let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+      let day = days[d.getDay()];
+      let date = d.getDate();
+      let month = months[d.getMonth()];
+      let year = d.getFullYear();
+
+      return `${day}, ${month} ${date} ${year}`;
+    },
   },
 };
 </script>
@@ -62,6 +87,10 @@ body {
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
+}
+
+#app.warm {
+  background-image: url("./assets/warm-bg.jpeg");
 }
 
 main {
