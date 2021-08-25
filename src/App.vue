@@ -9,11 +9,16 @@
       <div class="search-box">
         <input type="text" class="search-bar" placeholder="Search..." v-model="query" @keypress="fetchWeather" />
       </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-light btn-sm" v-on:click="fetchWeatherClick()">
+          Get Weather
+        </button>
+      </div>
+      <br />
       <div class="weather-wrap" v-if="typeof weather.main != 'undefined'">
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
           <div class="date">{{ dateBuilder() }}</div>
-          <br />
           <br />
           <br />
           <div class="tag-titles">Now</div>
@@ -44,7 +49,16 @@ export default {
   },
   methods: {
     fetchWeather(e) {
-      if (e.key == "Enter") {
+      if (e.key == "Enter" && this.query != "") {
+        fetch(`${this.url_base}weather?q=${this.query},US&units=imperial&APPID=${this.api_key}`)
+          .then(response => {
+            return response.json();
+          })
+          .then(this.setResults);
+      }
+    },
+    fetchWeatherClick() {
+      if (this.query != "") {
         fetch(`${this.url_base}weather?q=${this.query},US&units=imperial&APPID=${this.api_key}`)
           .then(response => {
             return response.json();
@@ -65,7 +79,7 @@ export default {
       }
       if (this.weather.main.temp > 75) {
         console.log("hot");
-        this.message = "It's hot out, shorts and t-shirt.";
+        this.message = "It's hot out, shorts and t-shirt or you'll be all sweaty.";
       }
       /* Conditions Logic */
       if (this.weather.weather[0].main == "Clouds") {
@@ -127,8 +141,6 @@ export default {
 }
 
 body {
-  max-width: 25em;
-  margin: 0 auto;
   font-family: "Inter", sans-serif;
 }
 
@@ -228,7 +240,7 @@ main {
 
 .created-by {
   color: #e1e1e1;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 12px;
   text-align: center;
 }
