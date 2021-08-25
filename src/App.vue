@@ -8,10 +8,17 @@
         <div class="location-box">
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
           <div class="date">{{ dateBuilder() }}</div>
+          <br />
+          <div>Now</div>
+          <br />
+          <div class="location">{{ message }}</div>
+          <br />
+          <div>Conditions</div>
+          <br />
+          <div class="location">{{ conditions }}</div>
         </div>
         <div class="weather-box">
           <div class="temperature">{{ Math.round(weather.main.temp) }}°F</div>
-          <div>{{ message }}</div>
           <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
@@ -29,6 +36,7 @@ export default {
       query: "",
       weather: {},
       message: "",
+      conditions: "",
     };
   },
   methods: {
@@ -43,6 +51,7 @@ export default {
     },
     setResults(results) {
       this.weather = results;
+      /* Temp Logic */
       if (this.weather.main.temp < 65) {
         console.log("cold");
         this.message = "It's cold, bring a jacket.";
@@ -54,6 +63,10 @@ export default {
       if (this.weather.main.temp > 75) {
         console.log("hot");
         this.message = "It's hot out, shorts and t-shirt.";
+      }
+      /* Conditions Logic */
+      if (this.weather.weather[0].main == "Clouds") {
+        this.conditions = "It's cloudy af.";
       }
     },
     dateBuilder() {
@@ -145,8 +158,8 @@ main {
 .location-box .location {
   color: white;
   font-size: 32px;
-  font-weight: 900;
-  text-align: center;
+  font-weight: 620;
+  /* text-align: center; */
   /* text-shadow: 1px 3px rgba(0, 0, 0, 0.25); */
 }
 
@@ -155,7 +168,7 @@ main {
   font-size: 20px;
   font-weight: 300;
   font-style: italic;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .weather-box {
