@@ -1,6 +1,11 @@
 <template>
   <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 70 ? 'warm' : ''">
     <main>
+      <p class="created-by">
+        Created by Ian Belfatto, using:
+        <a href="http://www.openweathermap.org" style="color:#e1e1e1" target="_blank">OpenWeatherMap</a>
+      </p>
+      <br />
       <div class="search-box">
         <input type="text" class="search-bar" placeholder="Search..." v-model="query" @keypress="fetchWeather" />
       </div>
@@ -9,17 +14,15 @@
           <div class="location">{{ weather.name }}, {{ weather.sys.country }}</div>
           <div class="date">{{ dateBuilder() }}</div>
           <br />
-          <div>Now</div>
+          <br />
+          <br />
+          <div class="tag-titles">Now</div>
           <br />
           <div class="location">{{ message }}</div>
           <br />
-          <div>Conditions</div>
+          <div class="tag-titles">Conditions</div>
           <br />
           <div class="location">{{ conditions }}</div>
-        </div>
-        <div class="weather-box">
-          <div class="temperature">{{ Math.round(weather.main.temp) }}°F</div>
-          <div class="weather">{{ weather.weather[0].main }}</div>
         </div>
       </div>
     </main>
@@ -124,6 +127,8 @@ export default {
 }
 
 body {
+  max-width: 25em;
+  margin: 0 auto;
   font-family: "Inter", sans-serif;
 }
 
@@ -214,5 +219,17 @@ main {
   font-weight: 700;
   font-style: italic;
   text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.tag-titles {
+  color: #e1e1e1;
+  font-weight: 600;
+}
+
+.created-by {
+  color: #e1e1e1;
+  font-weight: 300;
+  font-size: 12px;
+  text-align: center;
 }
 </style>
