@@ -1,5 +1,9 @@
 <template>
-  <div id="app" :class="typeof weather.main != 'undefined' && weather.main.temp > 70 ? 'warm' : ''">
+  <div
+    id="app"
+    style="display: flex; align-items: center; justify-content: center;"
+    :class="typeof weather.main != 'undefined' && weather.main.temp > 70 ? 'warm' : ''"
+  >
     <main>
       <p class="created-by">
         Created by Ian Belfatto, using:
@@ -156,6 +160,7 @@ body {
 main {
   min-height: 100vh;
   padding: 25px;
+  justify-content: center;
 }
 
 .search-box {
